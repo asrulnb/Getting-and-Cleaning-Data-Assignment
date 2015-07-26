@@ -1,7 +1,7 @@
 # Getting-and-Cleaning-Data-Assignment
 Assignment for Coursera Data Science Third Course : Getting and Cleaning Data
 
-# Steps to run the Analysis on the Assignment Data
+## Steps to run the Analysis on the Assignment Data
 
 1. Download the data source and the required files from the github link provided below and put into a local folder.
 	https://github.com/asrulnb/Getting-and-Cleaning-Data-Assignment
@@ -12,8 +12,9 @@ Assignment for Coursera Data Science Third Course : Getting and Cleaning Data
 	
 3. When the "run_analysis.R" file is run, it will automatically set the working directory to where the file is located.
 	- The source file should exist in the folder where the Raw data "UCI HAR Dataset" is present
+	- The script will automatically clear all data and variables in memory when it starts
 
-4. Run source(`run_analysis.R`), then it will generate a new file `tidy_data.txt` in the working directory.
+4. Running source(`run_analysis.R`) will generate a new file `tidy_data.txt` in the working directory.
 
 
 
