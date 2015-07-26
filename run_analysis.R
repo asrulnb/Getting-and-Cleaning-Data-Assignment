@@ -48,6 +48,10 @@ featureList <- read.table("UCI HAR Dataset/features.txt")
 colnames(subject) <- "Subject"
 colnames(label) <- "Activity"
 
+
+#### Saves the original column name
+originalNames <- featureList[2]
+
 #### Makes sure the names we going to use are valid
 valid_names <- make.names(names = t(featureList[2]),unique = TRUE,allow_ = TRUE)
 
@@ -64,7 +68,7 @@ rm(subject)
 rm(label)
 rm(data)
 rm(featureList)
-rm(valid_names)
+#rm(valid_names)
 
 # </Part 1 >
 
@@ -88,6 +92,7 @@ rm(ActivityLabels)
 # </Part 3 >
 
 # < Part 4 : Appropriately labels the data set with descriptive variable names >
+changedNames <- names(dsMain)
 
 names(dsMain)<-gsub("Acc", "Accelerometer", names(dsMain))
 names(dsMain)<-gsub("meanFreq", "MeanFrequency", names(dsMain))
@@ -104,11 +109,16 @@ names(dsMain)<-gsub("BodyBody", "Body", names(dsMain))
 names(dsMain)<-gsub("...", ".", names(dsMain), fixed = TRUE)
 names(dsMain)<-gsub(".", "", names(dsMain), fixed = TRUE)
 
+finalNames <- names(dsMain)
+
 # </Part 4 >
 
 # < Part 5 : creates a second, independent tidy data set with the average of each variable for each activity and each subject >
 
+#### Change the "Subject" column to Factor type
 dsMain$Subject <- as.factor(dsMain$Subject)
+
+#### Change dsMain to Data Table type
 dsMain <- data.table(dsMain)
 
 #### Calculate the Mean for all column except "Subject" and "Activity"
