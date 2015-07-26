@@ -17,6 +17,29 @@ Assignment for Coursera Data Science Third Course : Getting and Cleaning Data
 4. Running source(`run_analysis.R`) will generate a new file `tidy_data.txt` in the working directory.
 
 
+## Analysis Script Explanation
+1. The Script starts by clearing the session of any existing variables and data
+2. This script uses "dplyr" and "data.table" library and will load them to memory
+3. Part 1 : Merges the training and the test sets to create one data set
+	- Read "subject_train.txt", "y_train.txt" and "x_train.txt" from "Training" folder
+	- Read "subject_test.txt", "y_test.txt" and "x_test.txt" from "Test" folder
+	- Merge "subject_train" and "subject_test" into one data variable "subject"
+	- Merge "y_train.txt" and "y_test.txt" data into one variable "label"
+	- Merge "x_train.txt" and "x_test.txt" data into one variable "data"
+	- Read "UCI HAR Dataset/features.txt" data to use as column name for "data"
+	- Use "make.names" function to transform the column name so that we can use dplyr "select" function. (dplyr "select" function does not work with the column name provided in "UCI HAR Dataset/features.txt")
+	- Merge "subject","label" and "data" into one "dsMain"
+4. Part 2 : Extracts only the measurements on the mean and standard deviation for each measurement
+	- Use "dplyr" "select" function to extract "Subject", "Activity", column that have "mean" and "std" in its name
+5. Part 3 : Uses descriptive activity names to name the activities in the data set
+	- Read data from "UCI HAR Dataset/activity_labels.txt" file to use as descriptive name for the activity
+	- Use dplyr "mutate" function to change the integer in "Activity" column with more meaningful name
+6. Part 4 : Appropriately labels the data set with descriptive variable names
+	- Use "gsub" function to replace the previous column name into more meaningful ones
+7. Part 5 : creates a second, independent tidy data set with the average of each variable for each activity and each subject
+	- Convert "dsMain" from data.frame to data.table format
+	- Use "aggregate" function to calculate the mean for all relevant columns and store it to "tinyData" variable
+	- Use "write.table" function to output the "tinyData" variable into "tiny_data.txt" file without the row.names
 
 ## Getting and Cleaning Data Course Project
 
